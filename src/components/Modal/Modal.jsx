@@ -27,16 +27,16 @@ export const Modal = ({ src, alt, closeModal }) => {
     }
   };
 
-    return createPortal(
-      <div className={css.Overlay} onClick={onkBackdropClick}>
-        <div className={css.Modal}>
-          <img src={src} alt={alt} />
-          <p>{alt}</p>
-        </div>
-      </div>,
-      modalRoot
-    );
-  }
+  return createPortal(
+    <div className={css.Overlay} onClick={onkBackdropClick}>
+      <div className={css.Modal}>
+        <img src={src} alt={alt} />
+        <p>{alt}</p>
+      </div>
+    </div>,
+    document.body
+  );
+};
 
 Modal.propTypes = {
   src: PropTypes.string.isRequired,
