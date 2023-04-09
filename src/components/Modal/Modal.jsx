@@ -1,10 +1,9 @@
-//import { Component } from 'react';
 import { createPortal } from 'react-dom';
 import css from './Modal.module.css';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
-const modalRoot = document.querySelector('#modal-root');
+// const modalRoot = document.querySelector('#modal-root');
 
 export const Modal = ({ src, alt, closeModal }) => {
   useEffect(() => {
