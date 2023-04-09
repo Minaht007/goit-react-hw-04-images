@@ -13,7 +13,7 @@ export class App extends Component {
     totalHits: null,
   };
 
-  componentDidUpdate(preProps, preState) {
+  componentDidUpdate(preState) {
     const { searchName, page } = this.state;
     if (preState.searchName !== searchName || preState.page !== page) {
       fetchData(searchName, page).then(data => {

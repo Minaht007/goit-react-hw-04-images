@@ -1,20 +1,30 @@
-import { Component } from 'react';
+import PropTypes from 'prop-types';
+import css from './ImageGallery.module.css';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
-import Style from '../Style/Style.module.css';
 
-export class ImmageGallery extends Component {
-  render() {
-    const { photos } = this.props;
-    return (
-      <ul className={Style.ImageGallery}>
-        {photos.map(photo => (
+export const ImageGallery = ({ pics, showModal }) => {
+  return (
+    <ul className={css.ImageGallery}>
+      {pics.map(pic => {
+        return (
           <ImageGalleryItem
-            photo={photo}
-            key={photo.id}
-            largeImageURL={photo.largeImageURL}
+            key={pic.id}
+            webformatURL={pic.webformatURL}
+            tags={pic.tags}
+            largeImageURL={pic.largeImageURL}
+            showModal={showModal}
           />
-        ))}
-      </ul>
-    );
-  }
-}
+        );
+      })}
+    </ul>
+  );
+};
+
+ImageGallery.propTypes = {
+  pics: PropTypes.arrayOf(
+  PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    // showModal: PropTypes.func.isRequired
+  })
+  ).isRequired,
+};

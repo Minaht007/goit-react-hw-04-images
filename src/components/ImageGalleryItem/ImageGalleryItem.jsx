@@ -1,40 +1,24 @@
-import { Component } from 'react';
-import { ModalImg } from 'components/Modal/Modal';
-import Style from './ImageGalleryItem.module.css';
-export class ImageGalleryItem extends Component {
-  state = {
-    isModalOpen: false,
-  };
+import PropTypes from 'prop-types';
+import css from './ImageGalleryItem.module.css';
 
-  handlTogleModal = () => {
-    this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen }));
-  };
-  handlKeyPress = evt => {
-    if (evt?.type === 'keydown' && evt?.key !== 'Escape') return;
-    if (this.state) {
-      this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen }));
-    }
-  };
-  render() {
-    const { photo, largeImageURL } = this.props;
-    const { isModalOpen } = this.state;
-    return (
-      <>
-        <li
-          tabIndex={0}
-          className={Style.ImageGalleryItem_image}
-          onClick={this.handlKeyPress}
-          onKeyDown={this.handlKeyPress}
-        >
-          <img src={photo.previewURL} alt={photo.tags} />
-        </li>
-        {isModalOpen && (
-          <ModalImg
-            largPhoto={largeImageURL}
-            closeModal={(this.handlTogleModal, this.handlKeyPress)}
-          />
-        )}
-      </>
-    );
-  }
-}
+export const ImageGalleryItem = ({
+  tags,
+  webformatURL,
+  largeImageURL,
+  showModal,
+}) => {
+  return (
+    <li className={css.ImageGalleryItem} onClick={() => showModal(largeImageURL, tags)}>
+      <div>
+        <img src={webformatURL} alt={tags} loading="lazy" />
+      </div>
+    </li>
+  );
+};
+
+ImageGalleryItem.propTypes = {
+  tags: PropTypes.string.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  showModal: PropTypes.func.isRequired,
+};
